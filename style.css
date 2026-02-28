@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 /* ---- Reset & Base ---- */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; font-size: 16px; }
 
 :root {
@@ -26,6 +26,7 @@ body {
   color: var(--white);
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
 
 /* ---- Scrollbar ---- */
@@ -108,6 +109,7 @@ body {
   font-weight: 600;
   text-decoration: none;
   transition: all .3s;
+  touch-action: manipulation;
 }
 .nav-cta:hover { background: var(--gold); color: var(--black); }
 
@@ -118,6 +120,7 @@ body {
   gap: 5px;
   cursor: pointer;
   z-index: 1001;
+  touch-action: manipulation;
 }
 .hamburger span {
   display: block;
@@ -304,6 +307,7 @@ body {
   transition: all .3s ease;
   text-decoration: none;
   display: inline-block;
+  touch-action: manipulation;
 }
 .btn-primary:hover {
   background: var(--gold-light);
@@ -324,6 +328,7 @@ body {
   transition: all .3s ease;
   text-decoration: none;
   display: inline-block;
+  touch-action: manipulation;
 }
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
@@ -528,6 +533,7 @@ body {
   opacity: 0;
   transform: translateX(-10px);
   transition: all .4s ease;
+  touch-action: manipulation;
 }
 .col-card:hover .col-link { opacity: 1; transform: translateX(0); }
 
@@ -759,6 +765,7 @@ body {
   text-decoration: none;
   display: inline-block;
   transition: all .3s;
+  touch-action: manipulation;
 }
 .map-btn:hover { background: var(--gold-light); }
 .map-note {
