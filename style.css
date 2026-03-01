@@ -230,7 +230,8 @@ body {
 }
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(64px, 12vw, 130px);
+  font-size: clamp(38px, 10vw, 130px);
+  margin-right: -12px;
   font-weight: 300;
   line-height: 1;
   letter-spacing: 12px;
@@ -1055,6 +1056,6 @@ footer {
 @media (max-width: 480px) {
   .products-grid  { grid-template-columns: 1fr; }
   .about-badge    { display: none; }
-  .hero-title     { letter-spacing: 6px; }
+  .hero-title { font-size: clamp(32px, 11vw, 48px); letter-spacing: 4px; margin-right: -4px; }
   .stats-grid     { grid-template-columns: 1fr; }
 }
