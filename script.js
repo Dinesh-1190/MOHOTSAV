@@ -5,10 +5,22 @@
 
 /* ---- Cursor Glow ---- */
 const cursorGlow = document.getElementById('cursor-glow');
-document.addEventListener('mousemove', (e) => {
-  cursorGlow.style.left = e.clientX + 'px';
-  cursorGlow.style.top  = e.clientY + 'px';
-});
+
+if (window.matchMedia('(hover: hover)').matches) {
+  let ticking = false;
+  document.addEventListener('mousemove', (e) => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top  = e.clientY + 'px';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+} else {
+  cursorGlow.style.display = 'none';
+}
 
 /* ---- Navbar Scroll Effect ---- */
 const navbar = document.getElementById('navbar');
@@ -49,19 +61,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* ---- Particle Generator ---- */
 const particleContainer = document.getElementById('particles');
-const PARTICLE_COUNT = 22;
-for (let i = 0; i < PARTICLE_COUNT; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  const size = 1 + Math.random() * 3;
-  p.style.cssText = `
-    left: ${Math.random() * 100}%;
-    width: ${size}px;
-    height: ${size}px;
-    animation-delay: ${(Math.random() * 10).toFixed(2)}s;
-    animation-duration: ${(8 + Math.random() * 8).toFixed(2)}s;
-  `;
-  particleContainer.appendChild(p);
+
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const isMobile = window.innerWidth < 768;
+  const PARTICLE_COUNT = isMobile ? 10 : 22;
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 1 + Math.random() * 2;
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${size}px;
+      height: ${size}px;
+      animation-delay: ${(Math.random() * 10).toFixed(2)}s;
+      animation-duration: ${(10 + Math.random() * 10).toFixed(2)}s;
+    `;
+    particleContainer.appendChild(p);
+  }
+} else {
+  particleContainer.style.display = 'none';
 }
 
 /* ---- Scroll Reveal (Intersection Observer) ---- */
@@ -137,7 +156,7 @@ document.querySelectorAll('.prod-card, .feat-card').forEach(card => {
     const centerX = rect.width  / 2;
     const centerY = rect.height / 2;
     const rotateX = ((y - centerY) / centerY) * -4;
-    const rotateY = ((x - centerX) / centerX) *  4;
+    const rotateY = ((x - centerX) / centerX) *  4; 
     card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
   });
   card.addEventListener('mouseleave', () => {
@@ -147,8 +166,9 @@ document.querySelectorAll('.prod-card, .feat-card').forEach(card => {
 
 /* ---- Marquee pause on hover (already in CSS, but let's replicate) ---- */
 /* handled via CSS :hover rule */
-
+ 
 /* ---- "Back to top" on logo click ---- */
 document.querySelector('.nav-logo')?.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+ z
