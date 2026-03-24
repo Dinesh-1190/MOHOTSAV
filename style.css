@@ -1066,15 +1066,40 @@ footer {
 /* ================================================================
    SCROLL ANIMATIONS
    ================================================================ */
+/* ================================================================
+   SCROLL ANIMATIONS (With Googlebot Safety Net)
+   ================================================================ */
+
+/* 1. The Safety Net Timer */
+@keyframes seoFallback {
+  to { 
+    opacity: 1; 
+    transform: translate(0, 0); 
+  }
+}
+
+/* 2. Base Reveal State (Hidden initially) */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity .85s ease, transform .85s ease;
+  
+  /* Triggers the safety net after 2.5 seconds */
+  animation: seoFallback 0.1s linear 2.5s forwards;
 }
+
+/* 3. Directional Modifiers */
 .reveal.from-left  { transform: translateX(-44px); }
 .reveal.from-right { transform: translateX(44px); }
-.reveal.visible    { opacity: 1; transform: translate(0, 0); }
 
+/* 4. Visible State (Triggered by JS on scroll) */
+.reveal.visible { 
+  opacity: 1; 
+  transform: translate(0, 0); 
+  
+  /* Cancels the safety net timer so human users get the smooth transition */
+  animation: none; 
+}
 /* ================================================================
    RESPONSIVE
    ================================================================ */
